@@ -1,25 +1,23 @@
-# rust-cli
+# yacli - A library for creating CLI tools with a look-and-feel similiar to Cargo
 [![Travis](https://img.shields.io/travis/icorderi/cli.rs.svg)](https://travis-ci.org/icorderi/cli.rs)
-[![Crates.io](https://img.shields.io/crates/v/rust-cli.svg)](https://crates.io/crates/rust-cli)
-[![Crates.io](https://img.shields.io/crates/l/rust-cli.svg)](https://github.com/icorderi/cli.rs/blob/master/LICENSE/mit.md)
-
-Library for creating CLI tools with a look and feel similiar to Cargo
+[![Crates.io](https://img.shields.io/crates/v/yacli.svg)](https://crates.io/crates/yacli)
+[![Crates.io](https://img.shields.io/crates/l/yacli.svg)](https://github.com/icorderi/cli.rs/blob/master/LICENSE/mit.md)
 
 ## Getting Started
 
 ### Adding the dependency
 
-To use the latest stable **rust-cli** [crate] add this to your `Cargo.toml`:
+To use the latest stable **yacli** [crate] add this to your `Cargo.toml`:
 
 ```toml
-[dependencies.rust-cli]
+[dependencies.yacli]
 ```
 
 or
 
 ```toml
 [dependencies]
-rust-cli = "*"
+yacli = "*"
 ```
 
 or if you want to link it to the GitHub repo add this instead:
@@ -31,22 +29,22 @@ or if you want to link it to the GitHub repo add this instead:
 
 > **Note:** For more information on handling [dependencies] check the official cargo site.
 
-[crate]: https://crates.io/crates/rust-cli
+[crate]: https://crates.io/crates/yacli
 [dependencies]: http://doc.crates.io/guide.html#adding-dependencies
 
-### Importing rust-cli
+### Importing yacli
 
-To import rust-cli add this to your code:
+To import **yacli** add this to your code:
 
 ```rust
-extern crate cli;
+extern crate yacli;
 ```
 
 ## Documentation
 
 If you need help don't forget to checkout the online [documentation] for the library.
 
-[documentation]: http://icorderi.github.io/cli.rs/doc/rust-cli
+[documentation]: http://icorderi.github.io/cli.rs/doc/yacli
 
 ## Contributing
 
