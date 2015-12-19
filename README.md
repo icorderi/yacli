@@ -1,7 +1,7 @@
 # yacli - A library for creating CLI tools with a look-and-feel similiar to Cargo
-[![Travis](https://img.shields.io/travis/icorderi/cli.rs.svg)](https://travis-ci.org/icorderi/cli.rs)
+[![Travis](https://img.shields.io/travis/icorderi/yacli.svg)](https://travis-ci.org/icorderi/yacli)
 [![Crates.io](https://img.shields.io/crates/v/yacli.svg)](https://crates.io/crates/yacli)
-[![Crates.io](https://img.shields.io/crates/l/yacli.svg)](https://github.com/icorderi/cli.rs/blob/master/LICENSE/mit.md)
+[![Crates.io](https://img.shields.io/crates/l/yacli.svg)](https://github.com/icorderi/yacli/blob/master/LICENSE/mit.md)
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ or if you want to link it to the GitHub repo add this instead:
 
 ```toml
 [dependencies.shell]
-    git = "https://github.com/icorderi/cli.rs"
+    git = "https://github.com/icorderi/yacli"
 ```
 
 > **Note:** For more information on handling [dependencies] check the official cargo site.
@@ -44,14 +44,14 @@ extern crate yacli;
 
 If you need help don't forget to checkout the online [documentation] for the library.
 
-[documentation]: http://icorderi.github.io/cli.rs/doc/yacli
+[documentation]: http://icorderi.github.io/yacli/doc/yacli
 
 ## Contributing
 
 Get involved with the [issues] or submit a [PR].
 
-[issues]: https://github.com/icorderi/cli.rs/issues
-[PR]: https://github.com/icorderi/cli.rs/pulls
+[issues]: https://github.com/icorderi/yacli/issues
+[PR]: https://github.com/icorderi/yacli/pulls
 
 ## License
 

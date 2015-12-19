@@ -1,10 +1,10 @@
 [package]
 name = "yacli"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Ignacio Corderi <ignacio@exablox.com>"]
-homepage = "https://icorderi.github.io/cli.rs/"
-repository = "https://github.com/icorderi/cli.rs/"
-documentation = "https://icorderi.github.io/cli.rs/doc/yacli/"
+homepage = "https://icorderi.github.io/yacli/"
+repository = "https://github.com/icorderi/yacli/"
+documentation = "https://icorderi.github.io/yacli/doc/yacli/"
 description = "Library for creating CLI tools with a look and feel similiar to Cargo"
 keywords = [ "cli", "shell", "colors", "console" ]
 readme = "README.md"
