@@ -1,0 +1,20 @@
+[package]
+name = "rust-cli"
+version = "0.1.0"
+authors = ["Ignacio Corderi <ignacio@exablox.com>"]
+homepage = "https://icorderi.github.io/cli.rs/"
+repository = "https://github.com/icorderi/cli.rs/"
+documentation = "https://icorderi.github.io/cli.rs/doc/rust-cli/"
+description = "Library for creating CLI tools with a look and feel similiar to Cargo"
+keywords = [ "cli", "shell", "colors", "console" ]
+readme = "README.md"
+license = "MIT"
+
+[lib]
+name = "cli"
+path = "src/lib.rs"
+
+[dependencies]
+shell = "*"
+docopt = "*"
+rustc-serialize = "*"
