@@ -1,20 +1,16 @@
 [package]
-name = "rust-cli"
+name = "yacli"
 version = "0.1.0"
 authors = ["Ignacio Corderi <ignacio@exablox.com>"]
 homepage = "https://icorderi.github.io/cli.rs/"
 repository = "https://github.com/icorderi/cli.rs/"
-documentation = "https://icorderi.github.io/cli.rs/doc/rust-cli/"
+documentation = "https://icorderi.github.io/cli.rs/doc/yacli/"
 description = "Library for creating CLI tools with a look and feel similiar to Cargo"
 keywords = [ "cli", "shell", "colors", "console" ]
 readme = "README.md"
 license = "MIT"
 
-[lib]
-name = "cli"
-path = "src/lib.rs"
-
 [dependencies]
-shell = "*"
-docopt = "*"
-rustc-serialize = "*"
+shell = "^0.3.0"
+docopt = "^0.6.78"
+rustc-serialize = "^0.3.16"
