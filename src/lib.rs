@@ -28,13 +28,13 @@ extern crate rustc_serialize;
 pub use ::shell::MultiShell; // re-export
 use ::docopt::Docopt;
 use ::rustc_serialize::Decodable;
-use ::std::vec;
 use ::std::env;
+use ::std::path::Path;
 use ::std::error::Error;
 use ::std::marker::PhantomData;
 
 pub trait CliCommand<E> : Sized + Decodable {
-    fn from_argv(argv: vec::Vec<String>) -> Self {
+    fn from_argv(argv: Vec<String>) -> Self {
         ::docopt::Docopt::new(Self::usage())
             .and_then(|d| d.argv(argv.clone().into_iter()).decode() )
             .unwrap_or_else(|e| e.exit())
@@ -46,7 +46,7 @@ pub trait CliCommand<E> : Sized + Decodable {
 }
 
 pub trait CliDispatcher<E> {
-    fn dispatch(&self, vec::Vec<String>, &mut MultiShell) -> Result<(), E>;
+    fn dispatch(&self, Vec<String>, &mut MultiShell) -> Result<(), E>;
 }
 
 pub trait CliArgs<E, D>
@@ -78,7 +78,11 @@ where E: Error,
       A: CliArgs<E, D> + Decodable
 {
 
-    pub fn new<U: Into<String>, V: Into<String>>(usage: U, version: Option<V>) -> Self {
+    pub fn new<U: Into<String>>(usage: U) -> Self {
+        Self::new_with_version(usage, Some(full_version()))
+    }
+
+    pub fn new_with_version<U: Into<String>, V: Into<String>>(usage: U, version: Option<V>) -> Self {
         let v = match version {
                     Some(v) => Some(v.into()),
                     None    => None,
@@ -125,4 +129,23 @@ where E: Error,
             Err(e) => shell.error_full(&e, true).unwrap(),
         }
     }
+}
+
+/// Returns the current version of the package
+pub fn version() -> String {
+    format!("{}", match option_env!("CARGO_PKG_VERSION") {
+        Some(s) => s.to_string(),
+        None => format!("{}.{}.{}{}",
+                        env!("CARGO_PKG_VERSION_MAJOR"),
+                        env!("CARGO_PKG_VERSION_MINOR"),
+                        env!("CARGO_PKG_VERSION_PATCH"),
+                        option_env!("CARGO_PKG_VERSION_PRE").unwrap_or(""))
+    })
+}
+
+/// Returns "<program> <version>"
+pub fn full_version() -> String {
+    let args: Vec<_> = env::args().collect();
+    let p = Path::new(&args[0]);
+    format!("{} {}", p.file_name().unwrap().to_str().unwrap(), version())
 }
