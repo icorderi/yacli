@@ -1,6 +1,6 @@
 [package]
 name = "yacli"
-version = "0.2.1"
+version = "0.4.0"
 authors = ["Ignacio Corderi <ignacio@exablox.com>"]
 homepage = "https://icorderi.github.io/yacli/"
 repository = "https://github.com/icorderi/yacli/"
