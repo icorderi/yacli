@@ -11,7 +11,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   # Go to home and setup git
   cd $HOME
   git config --global user.name "Travis CI"
-  git config --global user.email "travis@travis-ci.org"
+  git config --global user.email "contact@travis-ci.com"
 
   # Using token clone gh-pages branch. Pipe to /dev/null to avoid printing the decrypted key.
   git clone --quiet --branch=gh-pages https://${GH_TOKEN}@${GH_REPO}  gh-pages > /dev/null 2>&1
