@@ -1,7 +1,7 @@
 [package]
 name = "yacli"
-version = "0.4.0"
-authors = ["Ignacio Corderi <ignacio@exablox.com>"]
+version = "0.4.1"
+authors = ["Ignacio Corderi <icorderi@msn.com>"]
 homepage = "https://icorderi.github.io/yacli/"
 repository = "https://github.com/icorderi/yacli/"
 documentation = "https://icorderi.github.io/yacli/doc/yacli/"
@@ -11,6 +11,6 @@ readme = "README.md"
 license = "MIT"
 
 [dependencies]
-shell = "^0.3.0"
-docopt = "^0.6.78"
-rustc-serialize = "^0.3.16"
+shell = "0.3"
+docopt = "0.6"
+rustc-serialize = "0.3"
