@@ -1,13 +1,11 @@
 language: rust
-
 env:
   global:
-    secure: lM8sY8wJcIpeSxi6V0pkj88qwdbae3NVjQu/xKvQ5NMXedrqqvRU5fWhO9tRh8mLh8od7pmjNIKUpcgKkyD837mFRyXik1KRdTb5Gp3ti1+1Q7JNzCerwAJB7U6wIywsd4R9ZVlTKM4xk35loEBhyKkETslDBQ3n07kn5hX7cVk=
-
+  - GH_REF: github.com/icorderi/yacli.git
+  - secure: LB/tpotNS0pGOCu4Bqlzo2e9nWMxEjPCuEL0xKR9k3B5jcAqukdTmFWZHfszdt4ijwxmQ3d4bWgdy3qYWVeuM+z1Uw/OiqVEQ8wyUvX74hRuxylfZ3iNj1EI5hWiqI1qHk4RwDnLF0rxYJEP2ZrpmbDILVgjrhVHe8UyjQ88tY84ya29upFl9o3+TyxB9tVBrqUGGFBnYgB18uE/ZXl1CuR3Y/xzGwpEEEYXKEcPdXepCJ4W0+0eLYIb6RqCYndKecDnogo3ljOCidHWb0T4sTRCtG+Cz8HyAS1dOE5lizoi/Vu9coxfmXSbrodUQcqW79FrcKceiRCQ+j570fQm6rn9UCJilB/wMdkg5GRKYxhIa+qnuKA3twywmCPg8QCaktZVIMqttJZ5OVpvOI6zWHI8t3TYO9bOdc4koezvp6/gti2s1JDAJBbq7zv3E6ltbWtDEkfV5rYu4pICukV7SJ3c4hdFEDMSQ1a8w/2jpu8YX7VHrRe7X/8s+THQOvZcZhnxpunfpIsaB5a+7tuZeRin6EU5ZcMVPeTfKOCTJPbtUqatuX17ohohuaJ3moSoTsg7fneIymjDC2BajxSM8tAmweyopDtrHqNUA8Dv/RWCpydHl57zOGejGW5YOrvLj1E+SJpJ+HByDqVoyFTSFbPRAKkRg0qCPnm3e+BEugM=
 script:
-  - cargo build --release --verbose
-  - cargo test --verbose
-  - cargo doc --no-deps --verbose
-
+- cargo build --release --verbose
+- cargo test --verbose
+- cargo doc --no-deps --verbose
 after_success:
-  - bash .travis-update-gh-pages.sh
+- bash .travis-update-gh-pages.sh
