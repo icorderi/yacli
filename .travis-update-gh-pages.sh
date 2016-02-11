@@ -20,7 +20,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   mkdir -p gh-pages/doc # in case it's the first time
   cd gh-pages/doc
   rm -rf *
-  cp -Rf $TRAVIS_BUILD_DIR/target/doc/* .
+  cp -Rf $TRAVIS_BUILD_DIR/$DOCS_OUT .
 
   # add, commit and push files
   git add --all -f .
