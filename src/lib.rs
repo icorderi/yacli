@@ -47,9 +47,11 @@ pub trait CliDispatcher<E> {
     fn dispatch(&self, Vec<String>, &mut MultiShell) -> Result<(), E>;
 }
 
-pub trait CliArgs<E, D>
+pub trait CliArgs<E, D>: Sized + Decodable
 where D: CliDispatcher<E>
 {
+    fn usage() -> &'static str;
+
     fn get_verbose(&self) -> bool { false }
 
     fn get_show_list(&self) -> bool { false }
@@ -59,6 +61,33 @@ where D: CliDispatcher<E>
     fn get_dispatcher<'a>(&'a self) -> &'a Option<D>;
 
     fn get_args<'a>(&'a self) -> &'a Vec<String>;
+
+    fn try_dispatch(&self, shell: &mut MultiShell) -> Result<(), E> {
+        match *self.get_dispatcher() {
+            Some(ref cmd) => try!(cmd.dispatch(self.get_args().clone(), shell)),
+            None =>  println!("{}", Self::usage()),
+        };
+        Ok(())
+    }
+}
+
+#[derive(Debug, RustcDecodable)]
+pub struct GenericArgs<C> {
+    pub arg_command: Option<C>,
+    pub arg_args: Vec<String>,
+    pub flag_list: bool,
+    pub flag_verbose: bool,
+}
+
+impl<C: Decodable> GenericArgs<C> {
+    pub fn from_argv(usage: &str, argv: Vec<String>) -> Self {
+        let docopt = Docopt::new(usage).unwrap()
+                            .options_first(true)
+                            .argv(argv.iter().map(|s| &s[..]))
+                            .help(true);
+
+        docopt.decode().unwrap_or_else(|e| e.exit())
+    }
 }
 
 pub struct CliApplication<E, D, A>
