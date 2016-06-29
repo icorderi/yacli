@@ -1,12 +1,31 @@
 language: rust
+rust: stable
+
+sudo: false
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+
+branches:
+  only:
+  - master
+
+before_script:
+- |
+  pip install 'travis-cargo<0.2' --user &&
+  export PATH=$HOME/.local/bin:$PATH
+
+script:
+- travis-cargo build
+- travis-cargo test
+- travis-cargo doc
+
+after_success:
+- travis-cargo doc-upload
+- travis-cargo coveralls --no-sudo --verify
+
 env:
   global:
-  - GH_REPO: github.com/icorderi/yacli.git
-  - DOCS_OUT: target/doc
-  - secure: LB/tpotNS0pGOCu4Bqlzo2e9nWMxEjPCuEL0xKR9k3B5jcAqukdTmFWZHfszdt4ijwxmQ3d4bWgdy3qYWVeuM+z1Uw/OiqVEQ8wyUvX74hRuxylfZ3iNj1EI5hWiqI1qHk4RwDnLF0rxYJEP2ZrpmbDILVgjrhVHe8UyjQ88tY84ya29upFl9o3+TyxB9tVBrqUGGFBnYgB18uE/ZXl1CuR3Y/xzGwpEEEYXKEcPdXepCJ4W0+0eLYIb6RqCYndKecDnogo3ljOCidHWb0T4sTRCtG+Cz8HyAS1dOE5lizoi/Vu9coxfmXSbrodUQcqW79FrcKceiRCQ+j570fQm6rn9UCJilB/wMdkg5GRKYxhIa+qnuKA3twywmCPg8QCaktZVIMqttJZ5OVpvOI6zWHI8t3TYO9bOdc4koezvp6/gti2s1JDAJBbq7zv3E6ltbWtDEkfV5rYu4pICukV7SJ3c4hdFEDMSQ1a8w/2jpu8YX7VHrRe7X/8s+THQOvZcZhnxpunfpIsaB5a+7tuZeRin6EU5ZcMVPeTfKOCTJPbtUqatuX17ohohuaJ3moSoTsg7fneIymjDC2BajxSM8tAmweyopDtrHqNUA8Dv/RWCpydHl57zOGejGW5YOrvLj1E+SJpJ+HByDqVoyFTSFbPRAKkRg0qCPnm3e+BEugM=
-script:
-- cargo build --release --verbose
-- cargo test --verbose
-- cargo doc --no-deps --verbose
-after_success:
-- bash .travis-update-gh-pages.sh
+    secure: YyFrYr5q2y6B3bIFDoEZk0bH/Ml/xKK97q0MS3juioLOjKPmECeHFoXbAOdGBXC3GEjr5006MgseSGsph/Cl+Vi/rAUgzK93ePDB85mHhfGV0/Sa6bs7dgI/V3W26bvIMeZVZOPQqN4VTbb+lVSBp3a2+EyTCXIObbRX+hNlsF63ElxccVTppi2IBVgH9pIZmzrct9thzQgLnhObUw0sp+CgAYIfHKqpH3mOwO+snMBtH6YJB2U7eSqJHVSguKGb/VR/GOaczLOLLXjDV2KJCTxV16retFcGCTKy0yWZZ/W2mwHxhEJ3h7j2zKiMeACJqjtGPuapQIy1a0AQ+tCxvLy8NerfroZ4xQ/H1XEUg6Pql7y6X4GoNwYAcw5kIJCr+Iz3OTO/kpNWDtoOvUTFhQiR6a7n0+p+srSZ5kR2loKvBZrrtB8v2HxQNqhW/jVDeOt06QJse5FCGFfydNy64X/CcyXKH2uY/m6n2SuG2Gb+C/XH9xDbTyEu3XiX34WgjLlrEimmOdqApMLTY7jvtTnSDcxA0fyI3DJwGmgUmupgKEcfuQzDT75WoZMLa8l28lYuUh3FgMD/irj1inhzNogBFcPXVovasz9jYnXkGKsE+qpR2z6WGJk28mxM99dbiAE/uQ3LxXvvOwnq9DGJHhhuiGvO0zOiDLXHKVMRbSI=
