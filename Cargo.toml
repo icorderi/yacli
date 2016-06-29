@@ -1,6 +1,6 @@
 [package]
 name = "yacli"
-version = "0.5.0"
+version = "0.5.1"
 authors = ["Ignacio Corderi <icorderi@msn.com>"]
 homepage = "https://icorderi.github.io/yacli/"
 repository = "https://github.com/icorderi/yacli/"
@@ -8,7 +8,7 @@ documentation = "https://icorderi.github.io/yacli/doc/yacli/"
 description = "Library for creating CLI tools with a look and feel similiar to Cargo"
 keywords = [ "cli", "shell", "colors", "console" ]
 readme = "README.md"
-license = "MIT"
+license = "MIT/Apache-2.0"
 
 [dependencies]
 shell = "0.3"
