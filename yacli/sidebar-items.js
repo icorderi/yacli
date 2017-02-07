@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["main_with_command",""]],"macro":[["generic_args",""],["main",""],["route",""]],"struct":[["MultiShell",""]],"trait":[["Command","Represents a CLI command"],["Decode",""]]});

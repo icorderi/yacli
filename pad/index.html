@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `pad` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, pad">
+
+    <title>pad - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'pad', ty: 'mod', relpath: '../'};</script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>pad</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/pad/lib.rs.html#1-236' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>This is a library for padding strings at runtime.</p>
+
+<p>The routines in <code>std::fmt</code> only work with formatting strings provided at
+compile-time, making them unsuitable for padding to a custom or
+user-defined value. Rather than re-implement all of <code>std::fmt</code>, padding is
+probably the most common use case, which is written in a more
+runtime-friendly fashion here.</p>
+
+<p>It provides four helper functions for the most common use cases, and one
+main function (<code>pad</code>) to cover the other cases.</p>
+
+<p>String length is determined with the
+<a href="http://doc.rust-lang.org/nightly/std/str/trait.StrExt.html#tymethod.width">width</a>
+function, without assuming CJK.</p>
+
+<h2 id='examples' class='section-header'><a href='#examples'>Examples</a></h2>
+<p>You can pad a string to have a minimum width with the <code>pad_to_width</code>
+method:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>pad</span>::<span class='ident'>PadStr</span>;
+<span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='string'>&quot;Hi there!&quot;</span>.<span class='ident'>pad_to_width</span>(<span class='number'>16</span>));</pre>
+
+<p>This will print out &quot;Hi there!&quot; followed by seven spaces, which is the
+number of spaces necessary to bring it up to a total of sixteen characters
+wide.</p>
+
+<h2 id='alignment' class='section-header'><a href='#alignment'>Alignment</a></h2>
+<p>By default, strings are left-aligned: any extra characters are added on
+the right. To change this, pass in an <code>Alignment</code> value:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>pad</span>::{<span class='ident'>PadStr</span>, <span class='ident'>Alignment</span>};
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;I&#39;m over here&quot;</span>.<span class='ident'>pad_to_width_with_alignment</span>(<span class='number'>20</span>, <span class='ident'>Alignment</span>::<span class='ident'>Right</span>);</pre>
+
+<p>There are four of these in total:</p>
+
+<ul>
+<li><strong>Left</strong>, which puts the text on the left and spaces on the right;</li>
+<li><strong>Right</strong>, which puts the text on the right and spaces on the left;</li>
+<li><strong>Middle</strong>, which centres the text evenly, putting it slightly to the
+left if it can&#39;t be exactly centered;</li>
+<li><strong>MiddleRight</strong>, as above, but to the right.</li>
+</ul>
+
+<h2 id='characters' class='section-header'><a href='#characters'>Characters</a></h2>
+<p>Another thing that&#39;s set by default is the character that&#39;s used to pad
+the strings - by default, it&#39;s space, but you can change it:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>pad</span>::<span class='ident'>PadStr</span>;
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;Example&quot;</span>.<span class='ident'>pad_to_width_with_char</span>(<span class='number'>10</span>, <span class='string'>&#39;_&#39;</span>);</pre>
+
+<h2 id='truncation' class='section-header'><a href='#truncation'>Truncation</a></h2>
+<p>Finally, you can override what happens when a value exceeds the width you
+give. By default, the width parameter indicates a <em>minimum width</em>: any
+string less will be padded, but any string greater will still be returned
+in its entirety.</p>
+
+<p>You can instead tell it to pad with a maximum value, which will truncate
+the input when a string longer than the width is passed in.</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>pad</span>::<span class='ident'>PadStr</span>;
+<span class='kw'>let</span> <span class='ident'>short</span> <span class='op'>=</span> <span class='string'>&quot;short&quot;</span>.<span class='ident'>with_exact_width</span>(<span class='number'>10</span>);  <span class='comment'>// &quot;short     &quot;</span>
+<span class='kw'>let</span> <span class='ident'>long</span> <span class='op'>=</span> <span class='string'>&quot;this string is long&quot;</span>.<span class='ident'>with_exact_width</span>(<span class='number'>10</span>);  <span class='comment'>// &quot;this strin&quot;</span></pre>
+
+<h2 id='a-full-example' class='section-header'><a href='#a-full-example'>A Full Example</a></h2>
+<p>All of the above functions delegate to the <code>pad</code> function, which you can
+use in special cases. Here, in order to <strong>right</strong>-pad a number with
+<strong>zeroes</strong>, pass in all the arguments:</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>pad</span>::{<span class='ident'>PadStr</span>, <span class='ident'>Alignment</span>};
+<span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='string'>&quot;12345&quot;</span>.<span class='ident'>pad</span>(<span class='number'>10</span>, <span class='string'>&#39;0&#39;</span>, <span class='ident'>Alignment</span>::<span class='ident'>Right</span>, <span class='bool-val'>true</span>);</pre>
+
+<p>(The <code>true</code> at the end could just as easily be <code>false</code>. It&#39;s whether to
+truncate or not.)</p>
+
+<h2 id='note-on-debugging' class='section-header'><a href='#note-on-debugging'>Note on Debugging</a></h2>
+<p>One very last point: the width function takes a <code>usize</code>, rather than a
+signed number type. This means that if you try to pass in a negative size,
+it&#39;ll wrap around to a positive size, and produce a massive string and
+possibly crash your program. So if your padding calls are failing for some
+reason, this is probably why.</p>
+</div><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.Alignment.html'
+                                  title='pad::Alignment'>Alignment</a></td>
+                           <td class='docblock-short'>
+                                <p>An <strong>alignment</strong> tells the padder where to put the spaces.</p>
+                           </td>
+                       </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='trait' href='trait.PadStr.html'
+                                  title='pad::PadStr'>PadStr</a></td>
+                           <td class='docblock-short'>
+                                <p>Functions to do with string padding.</p>
+                           </td>
+                       </tr></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "pad";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    <script defer src="../search-index.js"></script>
+</body>
+</html>
